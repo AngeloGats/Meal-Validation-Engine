@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastCare - Healthcare Claims Processing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <div class="nav-logo">FastCare Portal</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="step-1.html">Patient Portal</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Auditor Panel</a></li>
+                <li><a href="#">Security</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="portal-hero">
+        <h1 class="portal-hero-title">FastCare</h1>
+        <p class="portal-hero-subtitle">Patient Financial Aid Portal</p>
+        <p class="portal-hero-description">Streamlining healthcare assistance for those who need it most</p>
+
+        <!-- Portal Cards Grid -->
+        <div class="portal-cards-grid">
+            <!-- Patient Portal Card -->
+            <div class="portal-card" onclick="window.location.href='step-1.html'">
+                <div class="card-icon">⬆️</div>
+                <h3>Patient Portal</h3>
+                <p>Submit your financial aid application with required documents. Start your journey to receiving healthcare assistance.</p>
+                <ul class="card-features">
+                    <li>Upload clinical abstracts</li>
+                    <li>Submit billing statements</li>
+                    <li>Track application status</li>
+                </ul>
+                <div class="card-arrow">→</div>
+            </div>
+
+            <!-- Claims Dashboard Card -->
+            <div class="portal-card" onclick="window.location.href='dashboard.html'">
+                <div class="card-icon">⊞</div>
+                <h3>Claims Dashboard</h3>
+                <p>Comprehensive overview of all incoming claims, pending approvals, and approved funds. Monitor system-wide metrics.</p>
+                <ul class="card-features">
+                    <li>View all claims</li>
+                    <li>Track KPI metrics</li>
+                    <li>Monitor approval status</li>
+                </ul>
+                <div class="card-arrow">→</div>
+            </div>
+
+            <!-- Claims Auditor Card -->
+            <div class="portal-card" onclick="window.location.href='auditor.html'">
+                <div class="card-icon">📋</div>
+                <h3>Claims Auditor</h3>
+                <p>Review and process individual claims with detailed information. Approve or request clarification on submissions.</p>
+                <ul class="card-features">
+                    <li>Review claim details</li>
+                    <li>Verify documentation</li>
+                    <li>Process approvals</li>
+                </ul>
+                <div class="card-arrow">→</div>
+            </div>
+
+            <!-- Security & Fraud Detection Card -->
+            <div class="portal-card" onclick="window.location.href='security.html'">
+                <div class="card-icon">🛡️</div>
+                <h3>Security & Fraud Detection</h3>
+                <p>Monitor fraud alerts and security warnings. View audit trails and prevent duplicate claims across the system.</p>
+                <ul class="card-features">
+                    <li>Detect duplicates</li>
+                    <li>Review audit trails</li>
+                    <li>Prevent fraud</li>
+                </ul>
+                <div class="card-arrow">→</div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="portal-stats">
+            <div class="stat-item">
+                <div class="stat-number">145</div>
+                <div class="stat-label">Total Applications</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">28</div>
+                <div class="stat-label">Pending Reviews</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">₱2.4M</div>
+                <div class="stat-label">Funds Approved</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="portal-footer">
+        <p>Providing accessible healthcare financial assistance • Secure & confidential • Available 24/7</p>
+    </footer>
+</body>
+</html>

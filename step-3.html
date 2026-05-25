@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastCare - Patient Financial Aid Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Portal Header -->
+    <header class="portal-header">
+        <div class="portal-header-content">
+            <div>
+                <h1 class="portal-title">FastCare</h1>
+                <p class="portal-subtitle">Patient Financial Aid Portal</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portal Container -->
+    <div class="portal-container">
+        <!-- Step Indicators -->
+        <div class="step-indicators">
+            <div class="indicator completed">
+                <div class="indicator-circle">✓</div>
+                <span>Documents</span>
+            </div>
+            <div class="indicator-line"></div>
+            <div class="indicator completed">
+                <div class="indicator-circle">✓</div>
+                <span>Financial Info</span>
+            </div>
+            <div class="indicator-line"></div>
+            <div class="indicator active">
+                <div class="indicator-circle">3</div>
+                <span>Review</span>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <h2>Step 3 of 3: Review & Submit</h2>
+            <p class="form-description">Please review your information before submitting</p>
+
+            <!-- Error Messages -->
+            <div id="error-messages" class="error-messages"></div>
+
+            <!-- Personal Information Section -->
+            <div class="review-section">
+                <div class="review-header">
+                    <h3>Personal Information</h3>
+                </div>
+                <div class="review-content">
+                    <div class="review-row">
+                        <div class="review-item">
+                            <span class="review-label">Full Name</span>
+                            <span class="review-value" id="display-patient-name">Not provided</span>
+                        </div>
+                        <div class="review-item">
+                            <span class="review-label">Hospital Bill ID</span>
+                            <span class="review-value" id="display-bill-id">Not provided</span>
+                        </div>
+                    </div>
+                    <div class="review-row">
+                        <div class="review-item">
+                            <span class="review-label">Contact Number</span>
+                            <span class="review-value" id="display-contact-number">Not provided</span>
+                        </div>
+                        <div class="review-item">
+                            <span class="review-label">Email</span>
+                            <span class="review-value" id="display-email-address">Not provided</span>
+                        </div>
+                    </div>
+                    <div class="review-row">
+                        <div class="review-item">
+                            <span class="review-label">Address</span>
+                            <span class="review-value" id="display-complete-address">Not provided</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Information Section -->
+            <div class="review-section">
+                <div class="review-header">
+                    <h3>Financial Information</h3>
+                </div>
+                <div class="review-content">
+                    <div class="review-row">
+                        <div class="review-item">
+                            <span class="review-label">Monthly Income</span>
+                            <span class="review-value" id="display-monthly-income">Not provided</span>
+                        </div>
+                        <div class="review-item">
+                            <span class="review-label">Household Size</span>
+                            <span class="review-value" id="display-household-size">Not provided</span>
+                        </div>
+                    </div>
+                    <div class="review-row">
+                        <div class="review-item">
+                            <span class="review-label">Employment Status</span>
+                            <span class="review-value" id="display-employment-status">Not provided</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Aid Needed Section -->
+            <div class="review-section">
+                <div class="review-header">
+                    <h3>Financial Aid Needed</h3>
+                </div>
+                <div class="review-content">
+                    <div class="review-row">
+                        <div class="review-item">
+                            <span class="review-label">Type of Financial Aid</span>
+                            <span class="review-value" id="display-financial-aid-types">Not selected</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Uploaded Documents Section -->
+            <div class="review-section">
+                <div class="review-header">
+                    <h3>Uploaded Documents</h3>
+                </div>
+                <div class="review-content">
+                    <div class="review-row">
+                        <div class="review-item">
+                            <span class="review-label">Clinical Abstract</span>
+                            <span class="review-value error-value" id="display-clinical-abstract">✗ Not uploaded</span>
+                        </div>
+                        <div class="review-item">
+                            <span class="review-label">Billing Statement</span>
+                            <span class="review-value error-value" id="display-billing-statement">✗ Not uploaded</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkbox Agreement -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="agree-terms" required>
+                <label for="agree-terms" class="checkbox-label">I hereby declare that all information provided is true and accurate to the best of my knowledge. I understand that providing false information may result in disqualification from the financial aid program.</label>
+            </div>
+
+            <!-- Form Buttons -->
+            <div class="form-buttons">
+                <button type="button" class="btn-previous" onclick="window.location.href='step-2.html'">← Previous</button>
+                <button type="button" class="btn-submit" onclick="submitForm()">Submit Application</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadAndDisplayData() {
+            // Retrieve data from localStorage
+            const patientName = localStorage.getItem('patientName') || '';
+            const billId = localStorage.getItem('billId') || '';
+            const monthlyIncome = localStorage.getItem('monthlyIncome') || '';
+            const householdSize = localStorage.getItem('householdSize') || '';
+            const employmentStatus = localStorage.getItem('employmentStatus') || '';
+            const contactNumber = localStorage.getItem('contactNumber') || '';
+            const emailAddress = localStorage.getItem('emailAddress') || '';
+            const completeAddress = localStorage.getItem('completeAddress') || '';
+            const financialAidTypes = JSON.parse(localStorage.getItem('financialAidTypes') || '[]');
+
+            // Display data
+            document.getElementById('display-patient-name').textContent = patientName || 'Not provided';
+            document.getElementById('display-bill-id').textContent = billId || 'Not provided';
+            document.getElementById('display-monthly-income').textContent = monthlyIncome || 'Not provided';
+            document.getElementById('display-household-size').textContent = householdSize || 'Not provided';
+            document.getElementById('display-employment-status').textContent = employmentStatus || 'Not provided';
+            document.getElementById('display-contact-number').textContent = contactNumber || 'Not provided';
+            document.getElementById('display-email-address').textContent = emailAddress || 'Not provided';
+            document.getElementById('display-complete-address').textContent = completeAddress || 'Not provided';
+            
+            // Display selected financial aid types
+            const aidDisplay = document.getElementById('display-financial-aid-types');
+            if (financialAidTypes.length > 0) {
+                aidDisplay.textContent = financialAidTypes.join(', ');
+            } else {
+                aidDisplay.textContent = 'Not selected';
+            }
+
+            // Update error states for missing values
+            updateErrorStates({
+                patientName,
+                billId,
+                monthlyIncome,
+                householdSize,
+                employmentStatus,
+                contactNumber,
+                emailAddress,
+                completeAddress
+            });
+        }
+
+        function updateErrorStates(data) {
+            const errorMessages = [];
+            const fieldsWithStatus = {};
+
+            // Check each field
+            if (!data.patientName) {
+                errorMessages.push('Patient Full Name is required');
+                fieldsWithStatus['display-patient-name'] = 'error';
+            }
+            if (!data.billId) {
+                errorMessages.push('Hospital Bill ID is required');
+                fieldsWithStatus['display-bill-id'] = 'error';
+            }
+            if (!data.monthlyIncome) {
+                errorMessages.push('Monthly Household Income is required');
+                fieldsWithStatus['display-monthly-income'] = 'error';
+            }
+            if (!data.householdSize) {
+                errorMessages.push('Household Size is required');
+                fieldsWithStatus['display-household-size'] = 'error';
+            }
+            if (!data.employmentStatus) {
+                errorMessages.push('Employment Status is required');
+                fieldsWithStatus['display-employment-status'] = 'error';
+            }
+            if (!data.contactNumber) {
+                errorMessages.push('Contact Number is required');
+                fieldsWithStatus['display-contact-number'] = 'error';
+            }
+            if (!data.emailAddress) {
+                errorMessages.push('Email Address is required');
+                fieldsWithStatus['display-email-address'] = 'error';
+            }
+            if (!data.completeAddress) {
+                errorMessages.push('Complete Address is required');
+                fieldsWithStatus['display-complete-address'] = 'error';
+            }
+
+            // Display error messages
+            const errorContainer = document.getElementById('error-messages');
+            if (errorMessages.length > 0) {
+                errorContainer.innerHTML = '<div class="error-alert"><strong>Please complete the following fields:</strong><ul>' +
+                    errorMessages.map(msg => `<li>${msg}</li>`).join('') +
+                    '</ul></div>';
+            } else {
+                errorContainer.innerHTML = '';
+            }
+
+            // Update field styling
+            Object.keys(fieldsWithStatus).forEach(fieldId => {
+                const element = document.getElementById(fieldId);
+                if (element) {
+                    element.classList.add('error-value');
+                }
+            });
+        }
+
+        function submitForm() {
+            const checkbox = document.getElementById('agree-terms');
+            const patientName = localStorage.getItem('patientName');
+            const billId = localStorage.getItem('billId');
+            const monthlyIncome = localStorage.getItem('monthlyIncome');
+            const householdSize = localStorage.getItem('householdSize');
+            const employmentStatus = localStorage.getItem('employmentStatus');
+            const contactNumber = localStorage.getItem('contactNumber');
+            const emailAddress = localStorage.getItem('emailAddress');
+            const completeAddress = localStorage.getItem('completeAddress');
+
+            // Check if all required fields are filled
+            const financialAidTypes = JSON.parse(localStorage.getItem('financialAidTypes') || '[]');
+            if (!patientName || !billId || !monthlyIncome || !householdSize || !employmentStatus || !contactNumber || !emailAddress || !completeAddress || financialAidTypes.length === 0) {
+                alert('Please complete all required fields in previous steps before submitting.');
+                return;
+            }
+
+            if (!checkbox.checked) {
+                alert('Please confirm the information is accurate before submitting.');
+                return;
+            }
+
+            alert('Application submitted successfully!');
+            // Clear localStorage after successful submission
+            localStorage.clear();
+            // Redirect to homepage
+            window.location.href = 'HOMEPAGE.html';
+        }
+
+        // Load data on page load
+        window.addEventListener('load', loadAndDisplayData);
+    </script>
+</body>
+</html>

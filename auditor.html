@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastCare - Claims Auditor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <div class="nav-logo">FastCare Portal</div>
+            <ul class="nav-links">
+                <li><a href="HOMEPAGE.html">Home</a></li>
+                <li><a href="step-1.html">Patient Portal</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="auditor.html" class="active">Auditor Panel</a></li>
+                <li><a href="#">Security</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Auditor Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <h2>FastCare</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-item active">
+                    <span class="sidebar-icon">📋</span>
+                    <span>Review Claims</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <span class="sidebar-icon">✓</span>
+                    <span>Approved</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <span class="sidebar-icon">✗</span>
+                    <span>Rejected</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Audit Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <h1>Claims Auditor</h1>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-card-label">Total Pending Review</div>
+                    <div class="stat-card-value">42</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">High Risk</div>
+                    <div class="stat-card-value">8</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">Flagged for Review</div>
+                    <div class="stat-card-value">15</div>
+                </div>
+            </div>
+
+            <!-- Claims Review Table -->
+            <div class="claims-section">
+                <h2 class="section-title">Claims Pending Review</h2>
+                <div class="table-wrapper">
+                    <table class="claims-table">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Case ID</th>
+                                <th>Hospital</th>
+                                <th>Amount</th>
+                                <th>Risk Level</th>
+                                <th>Review</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="high-risk-row" data-claim='{
+                                "name": "Maria Santos",
+                                "caseId": "#2026-08A",
+                                "hospital": "St. Luke\'s Medical Center",
+                                "amount": "₱125,000",
+                                "risk": "Low",
+                                "documents": "2/2",
+                                "verification": "In Review",
+                                "processingTime": "3 days",
+                                "submitted": "May 14, 2026",
+                                "lastUpdated": "May 17, 2026",
+                                "reviewer": "A. Santos"
+                            }'>
+                                <td>Maria Santos</td>
+                                <td>#2026-08A</td>
+                                <td>St. Luke's Medical Center</td>
+                                <td>₱125,000</td>
+                                <td><span class="risk-badge low">Low</span></td>
+                                <td><button class="action-btn review-btn">Review</button></td>
+                            </tr>
+                            <tr class="high-risk-row" data-claim='{
+                                "name": "Juan Dela Cruz",
+                                "caseId": "#2026-09A",
+                                "hospital": "Philippine General Hospital",
+                                "amount": "₱85,500",
+                                "risk": "High",
+                                "documents": "2/2",
+                                "verification": "In Review",
+                                "processingTime": "3 days",
+                                "submitted": "May 14, 2026",
+                                "lastUpdated": "May 17, 2026",
+                                "reviewer": "A. Santos"
+                            }'>
+                                <td>Juan Dela Cruz</td>
+                                <td>#2026-09A</td>
+                                <td><a href="#">Philippine General Hospital</a></td>
+                                <td>₱85,500</td>
+                                <td><span class="risk-badge high">High</span></td>
+                                <td><button class="action-btn review-btn">Review</button></td>
+                            </tr>
+                            <tr data-claim='{
+                                "name": "Ana Reyes",
+                                "caseId": "#2026-10B",
+                                "hospital": "Makati Medical Center",
+                                "amount": "₱200,000",
+                                "risk": "Medium",
+                                "documents": "2/2",
+                                "verification": "In Review",
+                                "processingTime": "2 days",
+                                "submitted": "May 15, 2026",
+                                "lastUpdated": "May 18, 2026",
+                                "reviewer": "B. Garcia"
+                            }'>
+                                <td>Ana Reyes</td>
+                                <td>#2026-10B</td>
+                                <td>Makati Medical Center</td>
+                                <td>₱200,000</td>
+                                <td><span class="risk-badge medium">Medium</span></td>
+                                <td><button class="action-btn review-btn">Review</button></td>
+                            </tr>
+                            <tr class="high-risk-row" data-claim='{
+                                "name": "Carlos Mendoza",
+                                "caseId": "#2026-11C",
+                                "hospital": "Asian Hospital",
+                                "amount": "₱95,000",
+                                "risk": "High",
+                                "documents": "2/2",
+                                "verification": "In Review",
+                                "processingTime": "4 days",
+                                "submitted": "May 13, 2026",
+                                "lastUpdated": "May 16, 2026",
+                                "reviewer": "C. Lopez"
+                            }'>
+                                <td>Carlos Mendoza</td>
+                                <td>#2026-11C</td>
+                                <td>Asian Hospital</td>
+                                <td>₱95,000</td>
+                                <td><span class="risk-badge high">High</span></td>
+                                <td><button class="action-btn review-btn">Review</button></td>
+                            </tr>
+                            <tr data-claim='{
+                                "name": "Elena Garcia",
+                                "caseId": "#2026-12D",
+                                "hospital": "Medical City",
+                                "amount": "₱150,000",
+                                "risk": "Low",
+                                "documents": "2/2",
+                                "verification": "In Review",
+                                "processingTime": "1 day",
+                                "submitted": "May 19, 2026",
+                                "lastUpdated": "May 19, 2026",
+                                "reviewer": "D. Reyes"
+                            }'>
+                                <td>Elena Garcia</td>
+                                <td>#2026-12D</td>
+                                <td>Medical City</td>
+                                <td>₱150,000</td>
+                                <td><span class="risk-badge low">Low</span></td>
+                                <td><button class="action-btn review-btn">Review</button></td>
+                            </tr>
+                            <tr data-claim='{
+                                "name": "Roberto Torres",
+                                "caseId": "#2026-13E",
+                                "hospital": "Veterans Memorial",
+                                "amount": "₱75,000",
+                                "risk": "Low",
+                                "documents": "2/2",
+                                "verification": "In Review",
+                                "processingTime": "2 days",
+                                "submitted": "May 17, 2026",
+                                "lastUpdated": "May 19, 2026",
+                                "reviewer": "E. Santos"
+                            }'>
+                                <td>Roberto Torres</td>
+                                <td>#2026-13E</td>
+                                <td>Veterans Memorial</td>
+                                <td>₱75,000</td>
+                                <td><span class="risk-badge low">Low</span></td>
+                                <td><button class="action-btn review-btn">Review</button></td>
+                            </tr>
+                            <tr class="high-risk-row" data-claim='{
+                                "name": "Sofia Aquino",
+                                "caseId": "#2026-14F",
+                                "hospital": "Cardinal Santos",
+                                "amount": "₱110,000",
+                                "risk": "High",
+                                "documents": "2/2",
+                                "verification": "In Review",
+                                "processingTime": "5 days",
+                                "submitted": "May 12, 2026",
+                                "lastUpdated": "May 15, 2026",
+                                "reviewer": "F. Mendoza"
+                            }'>
+                                <td>Sofia Aquino</td>
+                                <td>#2026-14F</td>
+                                <td>Cardinal Santos</td>
+                                <td>₱110,000</td>
+                                <td><span class="risk-badge high">High</span></td>
+                                <td><button class="action-btn review-btn">Review</button></td>
+                            </tr>
+                            <tr data-claim='{
+                                "name": "Miguel Ramos",
+                                "caseId": "#2026-15G",
+                                "hospital": "St. Luke\'s BGC",
+                                "amount": "₱180,000",
+                                "risk": "Medium",
+                                "documents": "2/2",
+                                "verification": "In Review",
+                                "processingTime": "3 days",
+                                "submitted": "May 16, 2026",
+                                "lastUpdated": "May 18, 2026",
+                                "reviewer": "G. Torres"
+                            }'>
+                                <td>Miguel Ramos</td>
+                                <td>#2026-15G</td>
+                                <td>St. Luke's BGC</td>
+                                <td>₱180,000</td>
+                                <td><span class="risk-badge medium">Medium</span></td>
+                                <td><button class="action-btn review-btn">Review</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Review Panel Modal -->
+    <div class="review-panel" id="reviewPanel">
+        <div class="review-panel-header">
+            <h2>Claims Auditor</h2>
+            <div class="review-panel-controls">
+                <button class="nav-btn" id="prevBtn">‹</button>
+                <button class="nav-btn" id="nextBtn">›</button>
+                <button class="close-btn" id="closeBtn">✕</button>
+            </div>
+        </div>
+
+        <div class="review-panel-content">
+            <!-- Claim Details -->
+            <div class="claim-detail-section">
+                <div class="detail-row">
+                    <label>Patient Name</label>
+                    <div id="claimName"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Case ID</label>
+                    <div id="claimCaseId"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Hospital</label>
+                    <div id="claimHospital"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Claim Amount</label>
+                    <div id="claimAmount"></div>
+                </div>
+            </div>
+
+            <!-- Operational Metrics -->
+            <div class="claim-detail-section">
+                <h3>Operational Metrics</h3>
+                <div class="detail-row">
+                    <label>Documents Submitted</label>
+                    <div id="claimDocuments"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Verification Status</label>
+                    <div id="claimVerification"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Processing Time</label>
+                    <div id="claimProcessingTime"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Risk Score</label>
+                    <div id="claimRiskScore"></div>
+                </div>
+            </div>
+
+            <!-- Tracking Details -->
+            <div class="claim-detail-section">
+                <h3>Tracking Details</h3>
+                <div class="detail-row">
+                    <label>Submitted</label>
+                    <div id="claimSubmitted"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Last Updated</label>
+                    <div id="claimLastUpdated"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Assigned Reviewer</label>
+                    <div id="claimReviewer"></div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="panel-actions">
+                <button class="btn-approve" id="approveBtn">Approve Claim</button>
+                <button class="btn-clarification" id="clarificationBtn">Return for Clarification</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const reviewPanel = document.getElementById('reviewPanel');
+        const closeBtn = document.getElementById('closeBtn');
+        const approveBtn = document.getElementById('approveBtn');
+        const clarificationBtn = document.getElementById('clarificationBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentClaimIndex = -1;
+        let allClaims = [];
+
+        // Initialize claims from table rows
+        function initClaims() {
+            allClaims = Array.from(document.querySelectorAll('table tbody tr[data-claim]'));
+        }
+
+        // Populate panel with claim data
+        function loadClaim(index) {
+            if (index < 0 || index >= allClaims.length) return;
+            currentClaimIndex = index;
+            const row = allClaims[index];
+            const claim = JSON.parse(row.getAttribute('data-claim'));
+
+            document.getElementById('claimName').textContent = claim.name;
+            document.getElementById('claimCaseId').textContent = claim.caseId;
+            document.getElementById('claimHospital').textContent = claim.hospital;
+            document.getElementById('claimAmount').textContent = claim.amount;
+            document.getElementById('claimDocuments').textContent = claim.documents;
+            document.getElementById('claimVerification').textContent = claim.verification;
+            document.getElementById('claimProcessingTime').textContent = claim.processingTime;
+            document.getElementById('claimRiskScore').textContent = claim.risk;
+            document.getElementById('claimSubmitted').textContent = claim.submitted;
+            document.getElementById('claimLastUpdated').textContent = claim.lastUpdated;
+            document.getElementById('claimReviewer').textContent = claim.reviewer;
+        }
+
+        // Open review panel
+        document.querySelectorAll('.review-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                initClaims();
+                const row = this.closest('tr');
+                const claimIndex = allClaims.indexOf(row);
+                loadClaim(claimIndex);
+                reviewPanel.classList.add('active');
+            });
+        });
+
+        // Close panel
+        closeBtn.addEventListener('click', function() {
+            reviewPanel.classList.remove('active');
+        });
+
+        // Navigation buttons
+        prevBtn.addEventListener('click', function() {
+            if (currentClaimIndex > 0) {
+                loadClaim(currentClaimIndex - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', function() {
+            if (currentClaimIndex < allClaims.length - 1) {
+                loadClaim(currentClaimIndex + 1);
+            }
+        });
+
+        // Action buttons
+        approveBtn.addEventListener('click', function() {
+            const claimName = document.getElementById('claimName').textContent;
+            alert('✓ ' + claimName + ' has been approved.');
+            reviewPanel.classList.remove('active');
+        });
+
+        clarificationBtn.addEventListener('click', function() {
+            const claimName = document.getElementById('claimName').textContent;
+            alert('↩ ' + claimName + ' has been returned for clarification.');
+            reviewPanel.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

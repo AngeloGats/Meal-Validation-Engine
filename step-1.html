@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastCare - Patient Financial Aid Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Portal Header -->
+    <header class="portal-header">
+        <div class="portal-header-content">
+            <div>
+                <h1 class="portal-title">FastCare</h1>
+                <p class="portal-subtitle">Patient Financial Aid Portal</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portal Container -->
+    <div class="portal-container">
+        <!-- Step Indicators -->
+        <div class="step-indicators">
+            <div class="indicator active">
+                <div class="indicator-circle">1</div>
+                <span>Documents</span>
+            </div>
+            <div class="indicator-line"></div>
+            <div class="indicator">
+                <div class="indicator-circle">2</div>
+                <span>Financial Info</span>
+            </div>
+            <div class="indicator-line"></div>
+            <div class="indicator">
+                <div class="indicator-circle">3</div>
+                <span>Review</span>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <h2>Step 1 of 3: Document Upload</h2>
+            <p class="form-description">Please provide your information and upload required documents</p>
+
+            <form class="portal-form">
+                <!-- Patient Full Name -->
+                <div class="form-group">
+                    <label for="patient-name">Patient Full Name</label>
+                    <input type="text" id="patient-name" placeholder="Enter full name" required>
+                </div>
+
+                <!-- Hospital Bill ID Number -->
+                <div class="form-group">
+                    <label for="bill-id">Hospital Bill ID Number</label>
+                    <input type="text" id="bill-id" placeholder="Enter bill ID" required>
+                </div>
+
+                <!-- Type of Financial Aid Needed -->
+                <div class="form-group">
+                    <label>Type of Financial Aid Needed <span class="form-hint">(Select all that apply)</span></label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aid-hospitalization" value="Hospitalization Costs">
+                            <label for="aid-hospitalization">Hospitalization Costs</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aid-surgical" value="Surgical Procedures">
+                            <label for="aid-surgical">Surgical Procedures</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aid-medicine" value="Medicine/Pharmacy">
+                            <label for="aid-medicine">Medicine/Pharmacy</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aid-laboratory" value="Laboratory/Diagnostic Tests">
+                            <label for="aid-laboratory">Laboratory/Diagnostic Tests</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aid-emergency" value="Emergency Care">
+                            <label for="aid-emergency">Emergency Care</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aid-dialysis" value="Dialysis Treatment">
+                            <label for="aid-dialysis">Dialysis Treatment</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aid-chemotherapy" value="Chemotherapy/Radiation">
+                            <label for="aid-chemotherapy">Chemotherapy/Radiation</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aid-other" value="Other Medical Expenses">
+                            <label for="aid-other">Other Medical Expenses</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Areas -->
+                <div class="upload-areas">
+                    <div class="upload-box">
+                        <div class="upload-icon">⬆️</div>
+                        <h3>Upload Clinical Abstract</h3>
+                        <p>Max 10MB</p>
+                        <input type="file" hidden id="clinical-abstract">
+                        <label for="clinical-abstract" class="upload-label">Click to upload or drag and drop</label>
+                    </div>
+
+                    <div class="upload-box">
+                        <div class="upload-icon">⬆️</div>
+                        <h3>Upload Billing Statement</h3>
+                        <p>Max 10MB</p>
+                        <input type="file" hidden id="billing-statement">
+                        <label for="billing-statement" class="upload-label">Click to upload or drag and drop</label>
+                    </div>
+                </div>
+
+                <!-- Form Buttons -->
+                <div class="form-buttons">
+                    <button type="button" class="btn-previous" onclick="window.location.href='HOMEPAGE.html'">← Return to Homepage</button>
+                    <button type="button" class="btn-next" onclick="saveStep1()">Next →</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function saveStep1() {
+            const patientName = document.getElementById('patient-name').value;
+            const billId = document.getElementById('bill-id').value;
+            
+            // Get selected financial aid types
+            const aidCheckboxes = document.querySelectorAll('input[id^="aid-"]:checked');
+            const selectedAid = Array.from(aidCheckboxes).map(cb => cb.value);
+
+            // Save to localStorage
+            localStorage.setItem('patientName', patientName);
+            localStorage.setItem('billId', billId);
+            localStorage.setItem('financialAidTypes', JSON.stringify(selectedAid));
+
+            // Redirect to step 2
+            window.location.href = 'step-2.html';
+        }
+
+        // Load data on page load
+        window.addEventListener('load', function() {
+            const savedName = localStorage.getItem('patientName');
+            const savedBillId = localStorage.getItem('billId');
+            const savedAidTypes = JSON.parse(localStorage.getItem('financialAidTypes') || '[]');
+            
+            if (savedName) document.getElementById('patient-name').value = savedName;
+            if (savedBillId) document.getElementById('bill-id').value = savedBillId;
+            
+            // Check previously selected financial aid types
+            if (savedAidTypes.length > 0) {
+                document.querySelectorAll('input[id^="aid-"]').forEach(checkbox => {
+                    if (savedAidTypes.includes(checkbox.value)) {
+                        checkbox.checked = true;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

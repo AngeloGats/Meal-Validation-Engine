@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastCare - Security & Fraud Detection</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <div class="nav-logo">FastCare Portal</div>
+            <ul class="nav-links">
+                <li><a href="HOMEPAGE.html">Home</a></li>
+                <li><a href="step-1.html">Patient Portal</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="auditor.html">Auditor Panel</a></li>
+                <li><a href="security.html" class="active">Security</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Security Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <h2>FastCare</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-item active">
+                    <span class="sidebar-icon">🛡️</span>
+                    <span>Security Dashboard</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <span class="sidebar-icon">⚠️</span>
+                    <span>Fraud Alerts</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <span class="sidebar-icon">🔍</span>
+                    <span>Duplicate Detection</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <span class="sidebar-icon">📋</span>
+                    <span>Audit Logs</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <h1>🛡️ Security Verification & Fraud Detection</h1>
+            </div>
+
+            <!-- Fraud Alert -->
+            <div class="fraud-alert">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-content">
+                    <h3>DUPLICATE APPLICATION DETECTED</h3>
+                    <p>Security Warning: Patient matched an existing claim registry under Case ID #2026-09A as an external endpoint. Secondary application automatically deactivated to prevent double-dipping fraud.</p>
+                </div>
+            </div>
+
+            <!-- Audit Trail -->
+            <div class="audit-trail-section">
+                <h2 class="section-title">Audit Trail</h2>
+                <div class="audit-trail-log">
+                    <div class="log-header">System Logs - Real-time</div>
+                    <div class="log-entries">
+                        <div class="log-entry">[SECURITY] Duplicate patient record deleted</div>
+                        <div class="log-entry">[SYSTEM] Cross-referencing Claim registry database...</div>
+                        <div class="log-entry">[MATCH] Patient: Juan Dela Cruz | National ID: ****-1211</div>
+                        <div class="log-entry">[MATCH] Existing Case ID: #2026-09A | Hospital: Philippine General</div>
+                        <div class="log-entry">[ALERT] Active claim found at external endpoint API v2.3</div>
+                        <div class="log-entry">[VALIDATION] Checking submission timestamps...</div>
+                        <div class="log-entry">[FLAG] Secondary application submitted 12 days after primary</div>
+                        <div class="log-entry">[ACTION] Triggering fraud prevention protocol FP-001</div>
+                        <div class="log-entry">[DEACTIVATE] Secondary application ID #2026-60A-GHP marked inactive</div>
+                        <div class="log-entry">[NOTIFY] Alert sent to compliance team and case auditor</div>
+                        <div class="log-entry">[LOG] Event recorded in security audit trail</div>
+                        <div class="log-entry">[COMPLETE] Fraud detection workflow completed successfully</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Claims Registry -->
+            <div class="claims-section">
+                <h2 class="section-title">Active Claims Registry</h2>
+                <div class="table-wrapper">
+                    <table class="claims-table">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Case ID</th>
+                                <th>Hospital</th>
+                                <th>Amount</th>
+                                <th>Overall Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Maria Santos</td>
+                                <td>#2026-08A</td>
+                                <td>St. Luke's Medical Center</td>
+                                <td>₱125,000</td>
+                                <td><span class="status-badge reviewing">Reviewing</span></td>
+                            </tr>
+                            <tr class="flagged-row">
+                                <td>Juan Dela Cruz <span class="flagged-label">[FLAGGED]</span></td>
+                                <td>#2026-09A</td>
+                                <td><a href="#">Philippine General Hospital</a></td>
+                                <td>₱85,500</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ana Reyes</td>
+                                <td>#2026-10B</td>
+                                <td>Makati Medical Center</td>
+                                <td>₱200,000</td>
+                                <td><span class="status-badge approved">Approved</span></td>
+                            </tr>
+                            <tr>
+                                <td>Carlos Mendoza</td>
+                                <td>#2026-11C</td>
+                                <td>Asian Hospital</td>
+                                <td>₱95,000</td>
+                                <td><span class="status-badge reviewing">Reviewing</span></td>
+                            </tr>
+                            <tr>
+                                <td>Elena Garcia</td>
+                                <td>#2026-12D</td>
+                                <td>Medical City</td>
+                                <td>₱150,000</td>
+                                <td><span class="status-badge approved">Approved</span></td>
+                            </tr>
+                            <tr>
+                                <td>Roberto Torres</td>
+                                <td>#2026-13E</td>
+                                <td>Veterans Memorial</td>
+                                <td>₱75,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

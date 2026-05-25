@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastCare - Patient Financial Aid Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Portal Header -->
+    <header class="portal-header">
+        <div class="portal-header-content">
+            <div>
+                <h1 class="portal-title">FastCare</h1>
+                <p class="portal-subtitle">Patient Financial Aid Portal</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portal Container -->
+    <div class="portal-container">
+        <!-- Step Indicators -->
+        <div class="step-indicators">
+            <div class="indicator completed">
+                <div class="indicator-circle">✓</div>
+                <span>Documents</span>
+            </div>
+            <div class="indicator-line"></div>
+            <div class="indicator active">
+                <div class="indicator-circle">2</div>
+                <span>Financial Info</span>
+            </div>
+            <div class="indicator-line"></div>
+            <div class="indicator">
+                <div class="indicator-circle">3</div>
+                <span>Review</span>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <h2>Step 2 of 3: Financial Information</h2>
+            <p class="form-description">Please provide your financial and household details</p>
+
+            <form class="portal-form">
+                <!-- Income and Household Row -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="monthly-income">Monthly Household Income</label>
+                        <input type="text" id="monthly-income" placeholder="₱0.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="household-size">Household Size</label>
+                        <input type="text" id="household-size" placeholder="Number of members" required>
+                    </div>
+                </div>
+
+                <!-- Employment Status -->
+                <div class="form-group">
+                    <label for="employment-status">Employment Status</label>
+                    <select id="employment-status" required>
+                        <option value="" disabled selected>Select status</option>
+                        <option value="employed">Employed</option>
+                        <option value="self-employed">Self-Employed</option>
+                        <option value="unemployed">Unemployed</option>
+                        <option value="retired">Retired</option>
+                    </select>
+                </div>
+
+                <!-- Contact Number -->
+                <div class="form-group">
+                    <label for="contact-number">Contact Number</label>
+                    <input type="tel" id="contact-number" placeholder="+91 900 000 0000" required>
+                </div>
+
+                <!-- Email Address -->
+                <div class="form-group">
+                    <label for="email-address">Email Address</label>
+                    <input type="email" id="email-address" placeholder="email@example.com" required>
+                </div>
+
+                <!-- Complete Address -->
+                <div class="form-group">
+                    <label for="complete-address">Complete Address</label>
+                    <textarea id="complete-address" placeholder="Street, Saranag, City, Province" rows="4" required></textarea>
+                </div>
+
+                <!-- Form Buttons -->
+                <div class="form-buttons">
+                    <button type="button" class="btn-previous" onclick="window.location.href='step-1.html'">← Previous</button>
+                    <button type="button" class="btn-next" onclick="saveStep2()">Next →</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function saveStep2() {
+            const monthlyIncome = document.getElementById('monthly-income').value;
+            const householdSize = document.getElementById('household-size').value;
+            const employmentStatus = document.getElementById('employment-status').value;
+            const contactNumber = document.getElementById('contact-number').value;
+            const emailAddress = document.getElementById('email-address').value;
+            const completeAddress = document.getElementById('complete-address').value;
+
+            // Save to localStorage
+            localStorage.setItem('monthlyIncome', monthlyIncome);
+            localStorage.setItem('householdSize', householdSize);
+            localStorage.setItem('employmentStatus', employmentStatus);
+            localStorage.setItem('contactNumber', contactNumber);
+            localStorage.setItem('emailAddress', emailAddress);
+            localStorage.setItem('completeAddress', completeAddress);
+
+            // Redirect to step 3
+            window.location.href = 'step-3.html';
+        }
+
+        // Load data on page load
+        window.addEventListener('load', function() {
+            const savedIncome = localStorage.getItem('monthlyIncome');
+            const savedSize = localStorage.getItem('householdSize');
+            const savedStatus = localStorage.getItem('employmentStatus');
+            const savedContact = localStorage.getItem('contactNumber');
+            const savedEmail = localStorage.getItem('emailAddress');
+            const savedAddress = localStorage.getItem('completeAddress');
+            
+            if (savedIncome) document.getElementById('monthly-income').value = savedIncome;
+            if (savedSize) document.getElementById('household-size').value = savedSize;
+            if (savedStatus) document.getElementById('employment-status').value = savedStatus;
+            if (savedContact) document.getElementById('contact-number').value = savedContact;
+            if (savedEmail) document.getElementById('email-address').value = savedEmail;
+            if (savedAddress) document.getElementById('complete-address').value = savedAddress;
+        });
+    </script>
+</body>
+</html>
