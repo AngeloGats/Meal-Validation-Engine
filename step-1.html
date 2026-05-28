@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Portal Header -->
-    <header class="portal-header">
-        <div class="portal-header-content">
-            <div>
-                <h1 class="portal-title">FastCare</h1>
-                <p class="portal-subtitle">Patient Financial Aid Portal</p>
-            </div>
+    <!-- Navigation Bar -->
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <div class="nav-logo">FastCare Portal</div>
+            <ul class="nav-links">
+                <li><a href="HOMEPAGE.html">Home</a></li>
+                <li><a href="step-1.html" class="active">Patient Portal</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="auditor.html">Auditor Panel</a></li>
+                <li><a href="security.html">Security</a></li>
+                <li><a href="#" onclick="signOut(); return false;" class="nav-signout">Sign Out</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
     <!-- Portal Container -->
     <div class="portal-container">
@@ -94,6 +99,29 @@
                     </div>
                 </div>
 
+                <!-- Type of Financial Aid Needed - Government -->
+                <div class="form-group">
+                    <label>Type of Financial Aid Needed - Government <span class="form-hint">(Select all that apply)</span></label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="gov-dswd" value="DSWD (Department of Social Welfare and Development)">
+                            <label for="gov-dswd">DSWD (Department of Social Welfare and Development)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="gov-lingap" value="LINGAP (Luzon Integrated Network for Grassroots Assistance Program)">
+                            <label for="gov-lingap">LINGAP (Luzon Integrated Network for Grassroots Assistance Program)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="gov-philhealth" value="PhilHealth (Philippine Health Insurance Corporation)">
+                            <label for="gov-philhealth">PhilHealth (Philippine Health Insurance Corporation)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="gov-pcso" value="PCSO (Philippine Charity Sweepstakes Office)">
+                            <label for="gov-pcso">PCSO (Philippine Charity Sweepstakes Office)</label>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Upload Areas -->
                 <div class="upload-areas">
                     <div class="upload-box">
@@ -131,10 +159,15 @@
             const aidCheckboxes = document.querySelectorAll('input[id^="aid-"]:checked');
             const selectedAid = Array.from(aidCheckboxes).map(cb => cb.value);
 
+            // Get selected government aid types
+            const govAidCheckboxes = document.querySelectorAll('input[id^="gov-"]:checked');
+            const selectedGovAid = Array.from(govAidCheckboxes).map(cb => cb.value);
+
             // Save to localStorage
             localStorage.setItem('patientName', patientName);
             localStorage.setItem('billId', billId);
             localStorage.setItem('financialAidTypes', JSON.stringify(selectedAid));
+            localStorage.setItem('governmentAidTypes', JSON.stringify(selectedGovAid));
 
             // Redirect to step 2
             window.location.href = 'step-2.html';
@@ -142,9 +175,18 @@
 
         // Load data on page load
         window.addEventListener('load', function() {
+            // Check authentication for admin
+            const userRole = localStorage.getItem('userRole');
+            if (!userRole || userRole !== 'admin') {
+                alert('Access denied. Admin account required.');
+                window.location.href = 'login.html';
+                return;
+            }
+
             const savedName = localStorage.getItem('patientName');
             const savedBillId = localStorage.getItem('billId');
             const savedAidTypes = JSON.parse(localStorage.getItem('financialAidTypes') || '[]');
+            const savedGovAidTypes = JSON.parse(localStorage.getItem('governmentAidTypes') || '[]');
             
             if (savedName) document.getElementById('patient-name').value = savedName;
             if (savedBillId) document.getElementById('bill-id').value = savedBillId;
@@ -157,7 +199,24 @@
                     }
                 });
             }
+
+            // Check previously selected government aid types
+            if (savedGovAidTypes.length > 0) {
+                document.querySelectorAll('input[id^="gov-"]').forEach(checkbox => {
+                    if (savedGovAidTypes.includes(checkbox.value)) {
+                        checkbox.checked = true;
+                    }
+                });
+            }
         });
+
+        // Sign out function
+        function signOut() {
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userRole');
+            alert('Signed out successfully');
+            window.location.href = 'login.html';
+        }
     </script>
 </body>
 </html>

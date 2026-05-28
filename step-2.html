@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Portal Header -->
-    <header class="portal-header">
-        <div class="portal-header-content">
-            <div>
-                <h1 class="portal-title">FastCare</h1>
-                <p class="portal-subtitle">Patient Financial Aid Portal</p>
-            </div>
+    <!-- Navigation Bar -->
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <div class="nav-logo">FastCare Portal</div>
+            <ul class="nav-links">
+                <li><a href="HOMEPAGE.html">Home</a></li>
+                <li><a href="step-1.html" class="active">Patient Portal</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="auditor.html">Auditor Panel</a></li>
+                <li><a href="security.html">Security</a></li>
+                <li><a href="#" onclick="signOut(); return false;" class="nav-signout">Sign Out</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
     <!-- Portal Container -->
     <div class="portal-container">
@@ -117,6 +122,14 @@
 
         // Load data on page load
         window.addEventListener('load', function() {
+            // Check authentication for admin
+            const userRole = localStorage.getItem('userRole');
+            if (!userRole || userRole !== 'admin') {
+                alert('Access denied. Admin account required.');
+                window.location.href = 'login.html';
+                return;
+            }
+
             const savedIncome = localStorage.getItem('monthlyIncome');
             const savedSize = localStorage.getItem('householdSize');
             const savedStatus = localStorage.getItem('employmentStatus');
@@ -131,6 +144,14 @@
             if (savedEmail) document.getElementById('email-address').value = savedEmail;
             if (savedAddress) document.getElementById('complete-address').value = savedAddress;
         });
+
+        // Sign out function
+        function signOut() {
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userRole');
+            alert('Signed out successfully');
+            window.location.href = 'login.html';
+        }
     </script>
 </body>
 </html>

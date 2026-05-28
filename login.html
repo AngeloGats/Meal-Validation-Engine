@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastCare - Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Auth Container -->
+    <div class="auth-container">
+        <!-- Auth Box -->
+        <div class="auth-box">
+            <!-- Logo Section -->
+            <div class="auth-header">
+                <h1 class="auth-logo">FastCare</h1>
+                <p class="auth-subtitle">Patient Financial Aid Portal</p>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form" id="loginForm">
+                <h2>Sign In to Your Account</h2>
+                <p class="form-description">Access your FastCare portal to manage claims and applications</p>
+
+                <!-- Email/Username -->
+                <div class="form-group">
+                    <label for="email">Email Address or Username</label>
+                    <input type="text" id="email" placeholder="Enter your email or username" required>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="auth-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" class="btn-login">Sign In</button>
+            </form>
+
+            <!-- Divider -->
+            <div class="auth-divider">
+                <span>Don't have an account?</span>
+            </div>
+
+            <!-- Signup Link -->
+            <div class="auth-footer">
+                <p>Create a new account to get started</p>
+                <a href="signup.html" class="btn-signup-link">Create Account</a>
+            </div>
+        </div>
+
+        <!-- Background Message -->
+        <div class="auth-background">
+            <div class="auth-message">
+                <h3>Welcome Back</h3>
+                <p>Access your health claims and financial assistance applications securely.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hardcoded user credentials and roles
+        const users = {
+            'patient@gmail.com': { password: 'patient', role: 'patient' },
+            'admin@gmail.com': { password: 'admin', role: 'admin' },
+            'philhealth@agent.com': { password: 'philhealth', role: 'agent' },
+            'dswd@agent.com': { password: 'dswd', role: 'agent' },
+            'lingap@agent.com': { password: 'lingap', role: 'agent' },
+            'pcso@agent.com': { password: 'pcso', role: 'agent' }
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Check credentials
+            if (users[email] && users[email].password === password) {
+                const role = users[email].role;
+                // Store user info in localStorage
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userRole', role);
+                localStorage.setItem('agencyName', extractAgencyName(email));
+                
+                alert('Login successful!');
+                
+                // Redirect based on role
+                if (role === 'admin') {
+                    window.location.href = 'HOMEPAGE.html';
+                } else if (role === 'patient') {
+                    window.location.href = 'patient-home.html';
+                } else if (role === 'agent') {
+                    // Route to appropriate agency dashboard
+                    if (email.includes('philhealth')) {
+                        window.location.href = 'philhealth-agent.html';
+                    } else if (email.includes('dswd')) {
+                        window.location.href = 'dswd-agent.html';
+                    } else if (email.includes('lingap')) {
+                        window.location.href = 'lingap-agent.html';
+                    } else if (email.includes('pcso')) {
+                        window.location.href = 'pcso-agent.html';
+                    }
+                }
+            } else {
+                alert('Invalid email or password. Please try again.\n\nTest Accounts:\nAdmin: admin@gmail.com / admin\nPatient: patient@gmail.com / patient\n\nGovernment Agents:\nPhilHealth: philhealth@agent.com / philhealth\nDSWD: dswd@agent.com / dswd\nLINGAP: lingap@agent.com / lingap\nPCSO: pcso@agent.com / pcso');
+            }
+        });
+
+        function extractAgencyName(email) {
+            if (email.includes('philhealth')) return 'PhilHealth';
+            if (email.includes('dswd')) return 'DSWD';
+            if (email.includes('lingap')) return 'LINGAP';
+            if (email.includes('pcso')) return 'PCSO';
+            return 'Unknown';
+        }
+    </script>
+</body>
+</html>

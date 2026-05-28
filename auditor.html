@@ -16,7 +16,8 @@
                 <li><a href="step-1.html">Patient Portal</a></li>
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="auditor.html" class="active">Auditor Panel</a></li>
-                <li><a href="#">Security</a></li>
+                <li><a href="security.html">Security</a></li>
+                <li><a href="#" onclick="signOut(); return false;" class="nav-signout">Sign Out</a></li>
             </ul>
         </div>
     </nav>
@@ -408,6 +409,27 @@
             alert('↩ ' + claimName + ' has been returned for clarification.');
             reviewPanel.classList.remove('active');
         });
+
+        // Check authentication on page load
+        window.addEventListener('load', function() {
+            const userRole = localStorage.getItem('userRole');
+            const userEmail = localStorage.getItem('userEmail');
+            
+            if (!userRole || userRole !== 'admin') {
+                alert('Access denied. Admin account required.');
+                window.location.href = 'login.html';
+            }
+            
+            initClaims();
+        });
+
+        // Sign out function
+        function signOut() {
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userRole');
+            alert('Signed out successfully');
+            window.location.href = 'login.html';
+        }
     </script>
 </body>
 </html>

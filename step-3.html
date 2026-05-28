@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Portal Header -->
-    <header class="portal-header">
-        <div class="portal-header-content">
-            <div>
-                <h1 class="portal-title">FastCare</h1>
-                <p class="portal-subtitle">Patient Financial Aid Portal</p>
-            </div>
+    <!-- Navigation Bar -->
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <div class="nav-logo">FastCare Portal</div>
+            <ul class="nav-links">
+                <li><a href="HOMEPAGE.html">Home</a></li>
+                <li><a href="step-1.html" class="active">Patient Portal</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="auditor.html">Auditor Panel</a></li>
+                <li><a href="security.html">Security</a></li>
+                <li><a href="#" onclick="signOut(); return false;" class="nav-signout">Sign Out</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
     <!-- Portal Container -->
     <div class="portal-container">
@@ -120,6 +125,21 @@
                 </div>
             </div>
 
+            <!-- Government Aid Section -->
+            <div class="review-section">
+                <div class="review-header">
+                    <h3>Government Financial Aid</h3>
+                </div>
+                <div class="review-content">
+                    <div class="review-row">
+                        <div class="review-item">
+                            <span class="review-label">Government Aid Programs</span>
+                            <span class="review-value" id="display-government-aid-types">Not selected</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Uploaded Documents Section -->
             <div class="review-section">
                 <div class="review-header">
@@ -155,6 +175,14 @@
 
     <script>
         function loadAndDisplayData() {
+            // Check authentication for admin
+            const userRole = localStorage.getItem('userRole');
+            if (!userRole || userRole !== 'admin') {
+                alert('Access denied. Admin account required.');
+                window.location.href = 'login.html';
+                return;
+            }
+
             // Retrieve data from localStorage
             const patientName = localStorage.getItem('patientName') || '';
             const billId = localStorage.getItem('billId') || '';
@@ -165,6 +193,7 @@
             const emailAddress = localStorage.getItem('emailAddress') || '';
             const completeAddress = localStorage.getItem('completeAddress') || '';
             const financialAidTypes = JSON.parse(localStorage.getItem('financialAidTypes') || '[]');
+            const governmentAidTypes = JSON.parse(localStorage.getItem('governmentAidTypes') || '[]');
 
             // Display data
             document.getElementById('display-patient-name').textContent = patientName || 'Not provided';
@@ -182,6 +211,14 @@
                 aidDisplay.textContent = financialAidTypes.join(', ');
             } else {
                 aidDisplay.textContent = 'Not selected';
+            }
+
+            // Display selected government aid types
+            const govAidDisplay = document.getElementById('display-government-aid-types');
+            if (governmentAidTypes.length > 0) {
+                govAidDisplay.textContent = governmentAidTypes.join(', ');
+            } else {
+                govAidDisplay.textContent = 'Not selected';
             }
 
             // Update error states for missing values
@@ -267,7 +304,8 @@
 
             // Check if all required fields are filled
             const financialAidTypes = JSON.parse(localStorage.getItem('financialAidTypes') || '[]');
-            if (!patientName || !billId || !monthlyIncome || !householdSize || !employmentStatus || !contactNumber || !emailAddress || !completeAddress || financialAidTypes.length === 0) {
+            const governmentAidTypes = JSON.parse(localStorage.getItem('governmentAidTypes') || '[]');
+            if (!patientName || !billId || !monthlyIncome || !householdSize || !employmentStatus || !contactNumber || !emailAddress || !completeAddress || financialAidTypes.length === 0 || governmentAidTypes.length === 0) {
                 alert('Please complete all required fields in previous steps before submitting.');
                 return;
             }
@@ -286,6 +324,14 @@
 
         // Load data on page load
         window.addEventListener('load', loadAndDisplayData);
+
+        // Sign out function
+        function signOut() {
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userRole');
+            alert('Signed out successfully');
+            window.location.href = 'login.html';
+        }
     </script>
 </body>
 </html>

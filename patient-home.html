@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastCare - Patient Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <div class="nav-logo">FastCare Portal</div>
+            <ul class="nav-links">
+                <li><a href="patient-home.html" class="active">Home</a></li>
+                <li><a href="patient-step-1.html">Apply for Aid</a></li>
+                <li><a href="#">My Applications</a></li>
+                <li><a href="#">Account</a></li>
+                <li><a href="#" onclick="signOut(); return false;" class="nav-signout">Sign Out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Patient Portal Hero -->
+    <section class="patient-hero">
+        <div class="patient-hero-content">
+            <h1>Welcome to FastCare Patient Portal</h1>
+            <p>Manage your healthcare financial assistance easily and securely</p>
+            <a href="patient-step-1.html" class="btn-primary">Start Application</a>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="patient-section">
+        <div class="section-container">
+            <h2 class="section-heading">Quick Actions</h2>
+            
+            <div class="patient-cards-grid">
+                <!-- New Application Card -->
+                <div class="patient-card" onclick="window.location.href='patient-step-1.html'">
+                    <div class="patient-card-icon">📝</div>
+                    <h3>New Application</h3>
+                    <p>Start a new financial aid application for your healthcare expenses</p>
+                    <div class="card-action">Begin →</div>
+                </div>
+
+                <!-- Check Status Card -->
+                <div class="patient-card" onclick="alert('Application status feature coming soon')">
+                    <div class="patient-card-icon">📊</div>
+                    <h3>Check Status</h3>
+                    <p>View the current status of your submitted applications</p>
+                    <div class="card-action">View →</div>
+                </div>
+
+                <!-- My Documents Card -->
+                <div class="patient-card" onclick="alert('Document management feature coming soon')">
+                    <div class="patient-card-icon">📄</div>
+                    <h3>My Documents</h3>
+                    <p>Upload and manage documents for your applications</p>
+                    <div class="card-action">Manage →</div>
+                </div>
+
+                <!-- Support Card -->
+                <div class="patient-card" onclick="alert('Support center coming soon')">
+                    <div class="patient-card-icon">🆘</div>
+                    <h3>Get Support</h3>
+                    <p>Get help with your application or account questions</p>
+                    <div class="card-action">Contact →</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Summary -->
+    <section class="patient-section patient-summary">
+        <div class="section-container">
+            <h2 class="section-heading">Your Summary</h2>
+            
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-label">Total Applications</div>
+                    <div class="summary-value">0</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">Active Applications</div>
+                    <div class="summary-value">0</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">Approved Amount</div>
+                    <div class="summary-value">₱0.00</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">Claimed Amount</div>
+                    <div class="summary-value">₱0.00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="patient-section">
+        <div class="section-container">
+            <h2 class="section-heading">Frequently Asked Questions</h2>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I apply for financial assistance?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer" style="display: none;">
+                        <p>Click on "New Application" or "Apply for Aid" in the navigation. Fill out the 3-step form with your personal information, financial details, and upload required documents.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What documents do I need?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer" style="display: none;">
+                        <p>You'll need a clinical abstract from your hospital and a billing statement. These should clearly show your diagnosis and itemized charges.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does approval take?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer" style="display: none;">
+                        <p>Most applications are reviewed within 5-7 business days. You'll receive email notifications at each stage of the review process.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What government aid programs are available?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer" style="display: none;">
+                        <p>We work with DSWD, LINGAP, PhilHealth, and PCSO. You can apply for multiple programs simultaneously to maximize your financial assistance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Information Banner -->
+    <section class="patient-info-banner">
+        <div class="banner-content">
+            <h3>Important Information</h3>
+            <p>All information is kept confidential and secure. Your privacy is our priority. For questions, contact our support team at support@fastcare.ph or call 1-800-FASTCARE.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="patient-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>FastCare</h4>
+                <p>Your trusted healthcare financial assistance partner</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Report Issue</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 FastCare Portal. All rights reserved. | Secure Healthcare Financial Assistance</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const toggle = this.querySelector('.faq-toggle');
+                
+                // Close other FAQs
+                document.querySelectorAll('.faq-answer').forEach(a => {
+                    if (a !== answer) {
+                        a.style.display = 'none';
+                        a.previousElementSibling.querySelector('.faq-toggle').textContent = '+';
+                    }
+                });
+                
+                // Toggle current FAQ
+                if (answer.style.display === 'none' || answer.style.display === '') {
+                    answer.style.display = 'block';
+                    toggle.textContent = '−';
+                } else {
+                    answer.style.display = 'none';
+                    toggle.textContent = '+';
+                }
+            });
+        });
+
+        // Check authentication on page load
+        window.addEventListener('load', function() {
+            const userRole = localStorage.getItem('userRole');
+            const userEmail = localStorage.getItem('userEmail');
+            
+            if (!userRole || userRole !== 'patient') {
+                alert('Access denied. Patient account required.');
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Sign out function
+        function signOut() {
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userRole');
+            alert('Signed out successfully');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

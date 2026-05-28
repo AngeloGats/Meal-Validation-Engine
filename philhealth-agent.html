@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastCare - PhilHealth Agent Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="admin-nav">
+        <div class="nav-container">
+            <div class="nav-logo">FastCare Portal</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">PhilHealth Agent</a></li>
+                <li><a href="#">Approved Applications</a></li>
+                <li><a href="#">Rejected Applications</a></li>
+                <li><a href="#">Agent Settings</a></li>
+                <li><a href="#" onclick="signOut(); return false;" class="nav-signout">Sign Out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Agent Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <h2>PhilHealth</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-item active">
+                    <span class="sidebar-icon">📋</span>
+                    <span>Applications Review</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <span class="sidebar-icon">✓</span>
+                    <span>Approved by Me</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <span class="sidebar-icon">✗</span>
+                    <span>Rejected by Me</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Agency Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <h1>PhilHealth Agency Dashboard</h1>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-card-label">Pending Review</div>
+                    <div class="stat-card-value">12</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">Approved Applications</div>
+                    <div class="stat-card-value">28</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">Rejected Applications</div>
+                    <div class="stat-card-value">5</div>
+                </div>
+            </div>
+
+            <!-- Applications Table Section -->
+            <div class="claims-section">
+                <h2 class="section-title">Applications Pending PhilHealth Approval</h2>
+                <div class="table-wrapper">
+                    <table class="claims-table">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Case ID</th>
+                                <th>Hospital</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-claim='{"name":"Maria Santos","caseId":"#2026-01A","hospital":"Philippine General Hospital","amount":"₱120,000","status":"Pending","documents":"Yes","verification":"In Progress","processingTime":"3 days","riskScore":"Low","submitted":"2026-05-20","lastUpdated":"2026-05-25","reviewer":"PhilHealth Agent","aidTypes":"PhilHealth, DSWD","hospitalBill":"Uploaded","clinicalAbstract":"Uploaded"}'>
+                                <td>Maria Santos</td>
+                                <td>#2026-01A</td>
+                                <td>Philippine General Hospital</td>
+                                <td>₱120,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td><button class="btn-review" onclick="openReview(this)">Review</button></td>
+                            </tr>
+                            <tr data-claim='{"name":"Juan Dela Cruz","caseId":"#2026-02B","hospital":"St. Luke\'s Medical Center","amount":"₱85,000","status":"Pending","documents":"Yes","verification":"Completed","processingTime":"2 days","riskScore":"Low","submitted":"2026-05-21","lastUpdated":"2026-05-26","reviewer":"PhilHealth Agent","aidTypes":"PhilHealth","hospitalBill":"Uploaded","clinicalAbstract":"Uploaded"}'>
+                                <td>Juan Dela Cruz</td>
+                                <td>#2026-02B</td>
+                                <td>St. Luke's Medical Center</td>
+                                <td>₱85,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td><button class="btn-review" onclick="openReview(this)">Review</button></td>
+                            </tr>
+                            <tr data-claim='{"name":"Rosa Garcia","caseId":"#2026-03C","hospital":"Makati Medical Center","amount":"₱200,000","status":"Pending","documents":"Yes","verification":"In Progress","processingTime":"4 days","riskScore":"Medium","submitted":"2026-05-19","lastUpdated":"2026-05-24","reviewer":"PhilHealth Agent","aidTypes":"PhilHealth, LINGAP","hospitalBill":"Uploaded","clinicalAbstract":"Uploaded"}'>
+                                <td>Rosa Garcia</td>
+                                <td>#2026-03C</td>
+                                <td>Makati Medical Center</td>
+                                <td>₱200,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td><button class="btn-review" onclick="openReview(this)">Review</button></td>
+                            </tr>
+                            <tr data-claim='{"name":"Antonio Reyes","caseId":"#2026-04D","hospital":"Asian Hospital","amount":"₱95,000","status":"Pending","documents":"Yes","verification":"Completed","processingTime":"2 days","riskScore":"Low","submitted":"2026-05-22","lastUpdated":"2026-05-26","reviewer":"PhilHealth Agent","aidTypes":"PhilHealth","hospitalBill":"Uploaded","clinicalAbstract":"Uploaded"}'>
+                                <td>Antonio Reyes</td>
+                                <td>#2026-04D</td>
+                                <td>Asian Hospital</td>
+                                <td>₱95,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td><button class="btn-review" onclick="openReview(this)">Review</button></td>
+                            </tr>
+                            <tr data-claim='{"name":"Carmen Mendoza","caseId":"#2026-05E","hospital":"Medical City","amount":"₱150,000","status":"Pending","documents":"Yes","verification":"In Progress","processingTime":"3 days","riskScore":"Low","submitted":"2026-05-20","lastUpdated":"2026-05-25","reviewer":"PhilHealth Agent","aidTypes":"PhilHealth","hospitalBill":"Uploaded","clinicalAbstract":"Uploaded"}'>
+                                <td>Carmen Mendoza</td>
+                                <td>#2026-05E</td>
+                                <td>Medical City</td>
+                                <td>₱150,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td><button class="btn-review" onclick="openReview(this)">Review</button></td>
+                            </tr>
+                            <tr data-claim='{"name":"Roberto Torres","caseId":"#2026-06F","hospital":"Veterans Memorial Medical Center","amount":"₱75,000","status":"Pending","documents":"Yes","verification":"Completed","processingTime":"2 days","riskScore":"Low","submitted":"2026-05-23","lastUpdated":"2026-05-27","reviewer":"PhilHealth Agent","aidTypes":"PhilHealth, PCSO","hospitalBill":"Uploaded","clinicalAbstract":"Uploaded"}'>
+                                <td>Roberto Torres</td>
+                                <td>#2026-06F</td>
+                                <td>Veterans Memorial Medical Center</td>
+                                <td>₱75,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td><button class="btn-review" onclick="openReview(this)">Review</button></td>
+                            </tr>
+                            <tr data-claim='{"name":"Sofia Aquino","caseId":"#2026-07G","hospital":"Cardinal Santos Medical Center","amount":"₱110,000","status":"Pending","documents":"Yes","verification":"In Progress","processingTime":"3 days","riskScore":"Medium","submitted":"2026-05-21","lastUpdated":"2026-05-26","reviewer":"PhilHealth Agent","aidTypes":"PhilHealth","hospitalBill":"Uploaded","clinicalAbstract":"Uploaded"}'>
+                                <td>Sofia Aquino</td>
+                                <td>#2026-07G</td>
+                                <td>Cardinal Santos Medical Center</td>
+                                <td>₱110,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td><button class="btn-review" onclick="openReview(this)">Review</button></td>
+                            </tr>
+                            <tr data-claim='{"name":"Miguel Ramos","caseId":"#2026-08H","hospital":"St. Luke\'s BGC","amount":"₱180,000","status":"Pending","documents":"Yes","verification":"Completed","processingTime":"2 days","riskScore":"Low","submitted":"2026-05-24","lastUpdated":"2026-05-27","reviewer":"PhilHealth Agent","aidTypes":"PhilHealth","hospitalBill":"Uploaded","clinicalAbstract":"Uploaded"}'>
+                                <td>Miguel Ramos</td>
+                                <td>#2026-08H</td>
+                                <td>St. Luke's BGC</td>
+                                <td>₱180,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td><button class="btn-review" onclick="openReview(this)">Review</button></td>
+                            </tr>
+                            <tr data-claim='{"name":"Elena Torres","caseId":"#2026-09I","hospital":"Ospital ng Makati","amount":"₱65,000","status":"Pending","documents":"Yes","verification":"In Progress","processingTime":"3 days","riskScore":"Low","submitted":"2026-05-22","lastUpdated":"2026-05-25","reviewer":"PhilHealth Agent","aidTypes":"PhilHealth, DSWD","hospitalBill":"Uploaded","clinicalAbstract":"Uploaded"}'>
+                                <td>Elena Torres</td>
+                                <td>#2026-09I</td>
+                                <td>Ospital ng Makati</td>
+                                <td>₱65,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td><button class="btn-review" onclick="openReview(this)">Review</button></td>
+                            </tr>
+                            <tr data-claim='{"name":"Fernando Lopez","caseId":"#2026-10J","hospital":"Cebu Doctors Hospital","amount":"₱140,000","status":"Pending","documents":"Yes","verification":"Completed","processingTime":"2 days","riskScore":"Low","submitted":"2026-05-25","lastUpdated":"2026-05-27","reviewer":"PhilHealth Agent","aidTypes":"PhilHealth","hospitalBill":"Uploaded","clinicalAbstract":"Uploaded"}'>
+                                <td>Fernando Lopez</td>
+                                <td>#2026-10J</td>
+                                <td>Cebu Doctors Hospital</td>
+                                <td>₱140,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td><button class="btn-review" onclick="openReview(this)">Review</button></td>
+                            </tr>
+                            <tr data-claim='{"name":"Pauline Reyes","caseId":"#2026-11K","hospital":"Davao Doctors Hospital","amount":"₱95,000","status":"Pending","documents":"Yes","verification":"In Progress","processingTime":"3 days","riskScore":"Low","submitted":"2026-05-23","lastUpdated":"2026-05-26","reviewer":"PhilHealth Agent","aidTypes":"PhilHealth","hospitalBill":"Uploaded","clinicalAbstract":"Uploaded"}'>
+                                <td>Pauline Reyes</td>
+                                <td>#2026-11K</td>
+                                <td>Davao Doctors Hospital</td>
+                                <td>₱95,000</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td><button class="btn-review" onclick="openReview(this)">Review</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Review Panel -->
+    <div class="review-panel" id="reviewPanel">
+        <!-- Close Button -->
+        <button class="panel-close-btn" id="closeBtn" onclick="closeReview()">✕</button>
+
+        <!-- Navigation Arrows -->
+        <div class="panel-navigation">
+            <button class="nav-arrow" id="prevBtn" onclick="previousClaim()">‹</button>
+            <span id="claimCounter">1/12</span>
+            <button class="nav-arrow" id="nextBtn" onclick="nextClaim()">›</button>
+        </div>
+
+        <!-- Claim Details -->
+        <div class="panel-content">
+            <h2>Application Review</h2>
+
+            <!-- Claim Header -->
+            <div class="claim-detail-section">
+                <h3>Patient Information</h3>
+                <div class="detail-row">
+                    <label>Patient Name</label>
+                    <div id="claimName"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Case ID</label>
+                    <div id="claimCaseId"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Hospital</label>
+                    <div id="claimHospital"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Amount Requested</label>
+                    <div id="claimAmount"></div>
+                </div>
+            </div>
+
+            <!-- Operational Metrics -->
+            <div class="claim-detail-section">
+                <h3>Application Status</h3>
+                <div class="detail-row">
+                    <label>Documents Submitted</label>
+                    <div id="claimDocuments"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Verification Status</label>
+                    <div id="claimVerification"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Processing Time</label>
+                    <div id="claimProcessingTime"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Risk Assessment</label>
+                    <div id="claimRiskScore"></div>
+                </div>
+            </div>
+
+            <!-- Submitted Documents -->
+            <div class="claim-detail-section">
+                <h3>Submitted Documents</h3>
+                <div class="detail-row">
+                    <label>Hospital Bill</label>
+                    <div id="claimHospitalBill"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Clinical Abstract</label>
+                    <div id="claimClinicalAbstract"></div>
+                </div>
+            </div>
+
+            <!-- Tracking Details -->
+            <div class="claim-detail-section">
+                <h3>Tracking Information</h3>
+                <div class="detail-row">
+                    <label>Submitted Date</label>
+                    <div id="claimSubmitted"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Last Updated</label>
+                    <div id="claimLastUpdated"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Assigned Reviewer</label>
+                    <div id="claimReviewer"></div>
+                </div>
+                <div class="detail-row">
+                    <label>Requested Aid Programs</label>
+                    <div id="claimAidTypes"></div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="panel-actions">
+                <button class="btn-approve" id="approveBtn" onclick="approveApplication()">Approve Application</button>
+                <button class="btn-clarification" id="requestBtn" onclick="requestClarification()">Request Clarification</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentClaimIndex = -1;
+        let allClaims = [];
+
+        // Initialize claims from table rows
+        function initClaims() {
+            allClaims = Array.from(document.querySelectorAll('table tbody tr[data-claim]'));
+        }
+
+        // Open review panel for a specific claim
+        function openReview(button) {
+            const row = button.closest('tr');
+            const index = Array.from(document.querySelectorAll('table tbody tr')).indexOf(row);
+            currentClaimIndex = index;
+            loadClaimData(index);
+            document.getElementById('reviewPanel').classList.add('active');
+        }
+
+        // Load and display claim data
+        function loadClaimData(index) {
+            if (index < 0 || index >= allClaims.length) return;
+
+            const claimData = JSON.parse(allClaims[index].getAttribute('data-claim'));
+
+            document.getElementById('claimName').textContent = claimData.name;
+            document.getElementById('claimCaseId').textContent = claimData.caseId;
+            document.getElementById('claimHospital').textContent = claimData.hospital;
+            document.getElementById('claimAmount').textContent = claimData.amount;
+            document.getElementById('claimDocuments').textContent = claimData.documents;
+            document.getElementById('claimVerification').textContent = claimData.verification;
+            document.getElementById('claimProcessingTime').textContent = claimData.processingTime;
+            document.getElementById('claimRiskScore').textContent = claimData.riskScore;
+            document.getElementById('claimSubmitted').textContent = claimData.submitted;
+            document.getElementById('claimLastUpdated').textContent = claimData.lastUpdated;
+            document.getElementById('claimReviewer').textContent = claimData.reviewer;
+            document.getElementById('claimAidTypes').textContent = claimData.aidTypes;
+            document.getElementById('claimHospitalBill').textContent = claimData.hospitalBill;
+            document.getElementById('claimClinicalAbstract').textContent = claimData.clinicalAbstract;
+
+            // Update claim counter
+            document.getElementById('claimCounter').textContent = (index + 1) + '/' + allClaims.length;
+        }
+
+        // Close review panel
+        function closeReview() {
+            document.getElementById('reviewPanel').classList.remove('active');
+        }
+
+        // Navigate to previous claim
+        function previousClaim() {
+            if (currentClaimIndex > 0) {
+                currentClaimIndex--;
+                loadClaimData(currentClaimIndex);
+            }
+        }
+
+        // Navigate to next claim
+        function nextClaim() {
+            if (currentClaimIndex < allClaims.length - 1) {
+                currentClaimIndex++;
+                loadClaimData(currentClaimIndex);
+            }
+        }
+
+        // Approve application
+        function approveApplication() {
+            const patientName = document.getElementById('claimName').textContent;
+            alert('✓ ' + patientName + ' - PhilHealth approval APPROVED.\n\nApplication forwarded to Admin for final approval.');
+            closeReview();
+        }
+
+        // Request clarification
+        function requestClarification() {
+            const patientName = document.getElementById('claimName').textContent;
+            alert('↩ ' + patientName + ' - Request for clarification sent.\n\nPatient will be notified to submit additional information.');
+            closeReview();
+        }
+
+        // Check authentication on page load
+        window.addEventListener('load', function() {
+            const userRole = localStorage.getItem('userRole');
+            const userEmail = localStorage.getItem('userEmail');
+            
+            if (!userRole || userRole !== 'agent') {
+                alert('Access denied. Government Agency Agent account required.');
+                window.location.href = 'login.html';
+            }
+            
+            initClaims();
+        });
+
+        // Sign out function
+        function signOut() {
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userRole');
+            alert('Signed out successfully');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
